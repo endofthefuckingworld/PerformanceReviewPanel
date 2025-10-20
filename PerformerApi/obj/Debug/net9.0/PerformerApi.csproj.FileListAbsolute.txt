@@ -262,3 +262,5 @@
 /Users/chenshixuan/PerformanceReviewPanel/PerformerApi/obj/Debug/net9.0/PerformerApi.pdb
 /Users/chenshixuan/PerformanceReviewPanel/PerformerApi/obj/Debug/net9.0/PerformerApi.genruntimeconfig.cache
 /Users/chenshixuan/PerformanceReviewPanel/PerformerApi/obj/Debug/net9.0/ref/PerformerApi.dll
+/Users/chenshixuan/PerformanceReviewPanel/PerformerApi/obj/Debug/net9.0/PerformerApi.sourcelink.json
+/Users/chenshixuan/PerformanceReviewPanel/PerformerApi/bin/Debug/net9.0/System.Text.Json.dll
