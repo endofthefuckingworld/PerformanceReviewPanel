@@ -1,0 +1,22 @@
+.form { max-width: 720px; display: grid; gap: 16px; }
+.field { display: grid; gap: 6px; }
+.field__label { font-weight: 700; font-family: "微軟正黑體"; }
+.req { color: #e11d48; margin-left: 4px; }
+.input {
+  width: 100%; padding: 10px 12px; border: 1px solid #d1d5db; border-radius: 10px;
+  font-size: 14px; font-family: "微軟正黑體", system-ui, -apple-system, "Segoe UI", Roboto, Arial, "Noto Sans TC", sans-serif;
+}
+.input:focus { outline: none; border-color: #1a73e8; box-shadow: 0 0 0 3px rgba(26,115,232,.15); }
+.input--textarea { min-height: 120px; resize: vertical; }
+.field__hint { color:#6b7280; font-size: 12px; }
+.field__error { color:#dc2626; font-size: 12px; }
+.field--error .input { border-color:#dc2626; }
+
+.form__actions { display:flex; gap:12px; margin-top: 8px; }
+.btn {
+  height: 40px; padding: 0 16px; border-radius: 10px; font-weight: 700; cursor: pointer; border: 0;
+}
+.btn--primary { background:#111; color:#fff; }
+.btn--primary:hover { background:#000; }
+.btn--ghost { background:#f3f4f6; color:#111; }
+.btn--ghost:hover { background:#e5e7eb; }

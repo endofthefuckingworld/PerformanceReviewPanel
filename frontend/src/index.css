@@ -1,0 +1,87 @@
+/* Header 容器 */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: #fff;
+  /* 移除陰影 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06);
+}
+
+/* 上層：Logo + 品牌 */
+.site-topbar{
+  height: 72px;
+  padding: 0 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.site-brand{ display: flex; align-items: center; gap: 12px; }
+
+.logo{ height: 48px; width: auto; } /* 放大 Logo */
+
+.brand-text{
+  font-size: 20px;
+  font-weight: 800;
+  color: #111827;
+  font-family: "Nunito","微軟正黑體",system-ui,-apple-system,"Segoe UI",Roboto,Arial,"Noto Sans TC",sans-serif;
+}
+
+.site-actions{ display:flex; align-items:center; gap:12px; }
+.user-btn{
+  background:#1a73e8; color:#fff; border:0; border-radius:10px;
+  padding:8px 14px; font-weight:700; cursor:pointer;
+}
+.user-btn:hover{ background:#1666c1; }
+
+/* 下層：分頁籤列 */
+.site-subnav{
+  padding: 0 16px;
+  display:flex;
+  gap:24px;
+  align-items:flex-end;
+  border-top: none; /* 去掉分隔線 */
+}
+
+/* 分頁籤 */
+.site-tab{
+  position: relative;
+  display:inline-flex;
+  align-items:center;
+  padding: 12px 6px;
+  color:#374151;        
+  font-weight:600;
+  font-size: 15px;      /* 比品牌名稱小 */
+  text-decoration:none;
+}
+
+/* active 狀態：只加藍底線 */
+.site-tab.active{ color:#374151; }
+.site-tab.active::after{
+  content:"";
+  position:absolute;
+  left:0; right:0; bottom:0;
+  height:3px;
+  background:#1a73e8;
+  border-radius:3px 3px 0 0;
+}
+
+/* 整個頁面背景 */
+body {
+  background: #f3f4f6; /* 淺灰，像 GitHub/Notion 後台 */
+  font-family: "微軟正黑體", system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  margin: 0;
+}
+
+/* 主內容容器：白色卡片置中 */
+.app-main {
+  max-width: 1400px;       /* 限制寬度 */
+  margin: 28px auto;       /* 上下 28px 間距，左右置中 */
+  padding: 28px;           /* 內距 */
+  background: #ffffff;     /* 白底卡片 */
+  border-radius: 12px;     /* 圓角 */
+  box-shadow: 0 2px 6px rgba(0,0,0,0.06); /* 卡片陰影 */
+}
+
+

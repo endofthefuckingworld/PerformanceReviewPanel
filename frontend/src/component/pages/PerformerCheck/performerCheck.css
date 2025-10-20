@@ -1,0 +1,251 @@
+/* ========== 全局基礎 ========== */
+*, *::before, *::after { box-sizing: border-box; }
+:root {
+  --gray-50:#fafafa; --gray-100:#f5f5f5; --gray-200:#eeeeee; --gray-300:#e0e0e0;
+  --gray-500:#9e9e9e; --gray-700:#616161; --gray-800:#424242;
+  --primary:#1976d2; --primary-600:#1565c0; --danger:#e53935; --warn:#facc15;
+  --radius-lg:16px; --radius-md:8px; --radius-sm:6px;
+  --gap-lg:24px; --gap-md:16px; --gap-sm:8px;
+  --font-zh:"微軟正黑體", system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", Arial, "Apple Color Emoji","Segoe UI Emoji";
+}
+body { font-family: var(--font-zh); }
+
+/* ========== 版面：左側篩選 + 右側表格 ========== */
+.pc-layout {
+  display: grid;
+  grid-template-columns: 200px 1.2fr;
+  gap: var(--gap-lg);
+  align-items: start;
+}
+.pc-sidebar {
+  position: sticky;
+  top: 96px;
+  align-self: start;
+}
+.pc-main {
+  min-width: 0;
+  overflow-x: auto;
+}
+
+/* RWD：窄螢幕改上下堆疊 */
+@media (max-width: 960px) {
+  .pc-layout { grid-template-columns: 1fr; gap: var(--gap-md); }
+  .pc-sidebar { position: static; }
+}
+
+/* ========== 左側 HoverTab ========== */
+.tab{
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: var(--gap-md);
+  margin: 0;
+  background: #fff;
+  box-shadow: none;
+}
+
+/* 按鈕 */
+.mainButton, .subButton{
+  font-family: var(--font-zh);
+  font-size: 15px;
+  font-weight: 700;
+  text-align: left;
+  padding: 10px 16px;
+  border-radius: var(--radius-lg);
+  cursor: pointer;
+  border: 1px solid transparent;
+  width: 100%;
+  min-width: 0;
+  transition: background-color .2s ease, color .2s ease, border-color .2s ease;
+}
+.mainButton{ background:#333; color:#fff; }
+.subButton{ background:#f7f7f9; color:#474747; border-color: var(--gray-200); }
+.mainButton:hover{ background:#222; }
+.subButton:hover{ background:#ececf1; color:#111; }
+
+/* 窄螢幕讓篩選橫排換行 */
+@media (max-width: 960px) {
+  .tab { flex-direction: row; flex-wrap: wrap; padding: 12px; gap: 8px; }
+  .tab .mainButton, .tab .subButton { flex: 1 1 45%; text-align: center; }
+}
+
+/* ========== 表格 ========== */
+.table-wrap {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.MuiTableCell-root { white-space: nowrap; }
+.MuiTableCell-head {
+  background: var(--gray-50);
+  color: var(--gray-800);
+  font-weight: 700;
+  font-family: var(--font-zh);
+}
+
+/* ========== 狀態 Badge ========== */
+.auditstate {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 15px 27px;
+  width: 68px;                 /* 固定寬度，可依字長調整，例如 70、80 都行 */
+  height: 26px;                /* 固定高度 */
+  border-radius: 9px;
+  font-size: 14px;             /* 統一字體大小 */
+  font-weight: 400;            /* 移除粗體 */
+  color: #fcf1f1;
+  text-align: center;
+
+  background-color: #1e88e5;   /* 預設：通過 */
+}
+
+/* 未通過 */
+.auditstate--active {
+  background-color: #e53935;
+}
+
+/* 未審核 */
+.auditstate--pending {
+  background-color: #474747;
+}
+
+
+/* ========== Dialog 內文排版 ========== */
+
+/* 小標題：取消舊有固定寬與外框，保持單行不換行 */
+.dialogTitle{
+  margin: 0 0 6px 0;
+  padding: 0 0 6px 0;
+  color: var(--gray-500);
+  font-family: var(--font-zh);
+  font-weight: 600;
+  border: 0;
+  width: auto;
+}
+.dialogTitle--inline{ display: inline-block; white-space: nowrap; word-break: keep-all; }
+
+/* Key-Value 區塊：穩定不跑版 */
+.kv { display: grid; grid-template-columns: 92px 1fr; align-items: center; column-gap: 8px; margin-bottom: 6px; }
+.kv__k { color: var(--gray-700); font-size: 13px; }
+.kv__v { font-weight: 500; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* 照片區：只限定在 mediaBox，避免全域 img 影響 */
+.mediaBox {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  min-height: 220px;                 /* 無圖時也保留空間 */
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  background: #f6f6f6;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden;
+}
+.mediaBox__img {
+  width: 100%; height: 100%; object-fit: cover; display: block;
+}
+.mediaBox__placeholder {
+  width: 100%; height: 100%;
+  color: #777; font-size: 13px; text-align: center; padding: 8px; overflow: auto;
+}
+@supports not (aspect-ratio: 1 / 1) {
+  .mediaBox { height: 240px; }       /* 老瀏覽器備援 */
+}
+
+/* 固定高度內容（簡介/影片），超出捲動 */
+.fixedPanel {
+  width: 100%;
+  min-height: 180px;
+  max-height: 180px;
+  overflow: auto;
+  border: 1px solid var(--gray-300);
+  border-radius: var(--radius-md);
+  background: #fff;
+  padding: 8px;
+}
+.fixedPanel pre {
+  white-space: pre;                  /* 保留原始排版，不自動換行 */
+  word-break: normal;                /* 不任意斷字 */
+  overflow-x: auto;                  /* 可水平捲動 */
+  overflow-y: auto;                  /* 可垂直捲動 */
+  margin: 0;
+  font-family: monospace;            /* 比較像文字框的感覺 */
+}
+.introBox { line-height: 1.5; }
+
+/* 右側審核面板：避免把中間擠爆，降低最小寬或移除 */
+.auditPanel { min-width: 220px; }
+.auditPanel .MuiFormControlLabel-label {
+  font-size: 14px !important;
+  color: #555;               /* 原本是純黑，現在略柔和 */
+}
+
+/* 操作按鈕（Dialog 內） */
+.btn { appearance: none; border-radius: var(--radius-md); padding: 8px 14px; font-weight: 600; cursor: pointer; }
+.btn--primary { background: var(--primary); border: 1px solid var(--primary); color: #fff; }
+.btn--primary:hover { background: var(--primary-600); border-color: var(--primary-600); }
+.btn--primary:disabled { background: #e0e0e0; border-color: #e0e0e0; color: #9e9e9e; cursor: not-allowed; }
+.btn--ghost { background: #fff; border: 1px solid var(--gray-300); color: #333; }
+.btn--ghost:hover { background: var(--gray-100); }
+
+/* Dialog 內 MUI Grid 項目不要被內容撐爆 */
+.dialogText .MuiGrid-item { min-width: 0; }
+
+/* 舊專案殘留造成位移的類別，統一清掉副作用 */
+.list{ position: static; left: 0; }
+
+/* ========== 額外細節 ========== */
+
+/* 讓 <pre> 內容能換行又維持原有斷行 */
+pre { white-space: pre-wrap; word-break: break-word; }
+
+/* 避免表格內文字撐爆時跳動 */
+td p { margin: 0; }
+
+/* 右欄操作區的按鈕群組可左右排列（若有需要可開啟）
+.dialogActions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 8px; }
+*/
+
+/* 小螢幕額外細節：取消右欄 min-width 以避免壓縮中間欄位 */
+@media (max-width: 960px) {
+  .auditPanel { min-width: auto; }
+  .kv { grid-template-columns: 88px 1fr; }
+}
+
+/* 形象影片固定框：16:9，可自訂高度 */
+.videoBox {
+  width: 100%;
+  aspect-ratio: 16 / 9;     /* 固定 16:9 */
+  min-height: 180px;        /* 想更大就調這裡，如 260px */
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #f6f6f6;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.videoBox iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+  display: block;
+}
+.videoBox__placeholder {
+  width: 100%;
+  height: 100%;
+  padding: 8px;
+  color: #777;
+  font-size: 13px;
+  text-align: center;
+  overflow: auto;           /* 連結太長可捲動 */
+}
+
+
+
+
+  
+  
+
+  
+  
