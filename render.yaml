@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: performer-api
+    env: dotnet
+    rootDir: PerformerApi
+    buildCommand: "dotnet restore && dotnet publish -c Release -o out"
+    startCommand: "dotnet out/PerformerApi.dll"
+    envVars:
+      - key: DATABASE_URL
+        sync: false
+      - key: ASPNETCORE_URLS
+        value: "http://0.0.0.0:${PORT}"
